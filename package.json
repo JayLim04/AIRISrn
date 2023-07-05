@@ -1,0 +1,32 @@
+{
+  "name": "airis",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "expo": "~48.0.18",
+    "expo-asset": "~8.9.1",
+    "expo-status-bar": "~1.4.4",
+    "firebase": "^9.23.0",
+    "react": "18.2.0",
+    "react-native": "0.71.8",
+    "react-native-swiper": "^1.6.0-rc.3",
+    "typescript": "^4.9.4",
+    "@types/react": "~18.0.27",
+    "@types/react-dom": "~18.0.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/react-native": "^0.72.2"
+  },
+  "private": true
+}
