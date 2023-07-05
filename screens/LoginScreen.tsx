@@ -11,10 +11,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { ActivityIndicator } from "react-native";
-import { Button } from "react-native";
 import Swiper from "react-native-swiper";
 import Constants from "expo-constants";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");

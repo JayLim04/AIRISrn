@@ -9,13 +9,6 @@ import HomeScreen from './screens/HomeScreen';
 const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
 
-function InsideLayout() {
-  return (
-    <InsideStack.Navigator>
-      {/* <InsideStack.Screen name="Home Page" component={} /> */}
-    </InsideStack.Navigator>
-  )
-}
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
