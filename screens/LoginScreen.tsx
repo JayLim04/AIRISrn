@@ -11,42 +11,32 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import Swiper from "react-native-swiper";
 import Constants from "expo-constants";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import SignUpScreen from "./SignUpScreen";
+const Stack = createNativeStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState("");
+  const navigation = useNavigation();
+  const [email, setEmail] = useState("");   
   const [password, setPassword] = useState("");
-  const [cfmpassword, setcfmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedRole, setSelectedRole] = useState("user");
-  const [fname, setfName] = useState("");
-  const [lname, setlName] = useState("");
 
   const swiperRef = useRef(null);
   const auth = FIREBASE_AUTH;
-
-  const goToPage = (index) => {
-    swiperRef.current.scrollBy(index - currentIndex, true);
-  };
-
-  const handleSwitchPress = (index) => {
-    if (currentIndex !== index) {
-      goToPage(index);
-      setCurrentIndex(index);
-    }
-  };
-
-  const handleIndexChanged = (index) => {
-    setCurrentIndex(index);
-  };
-
-  const handleRoleChange = (role) => {
-    setSelectedRole(role);
-  };
 
   const signIn = async () => {
     setLoading(true);
@@ -61,36 +51,20 @@ const LoginScreen = () => {
     }
   };
 
-  const signUp = async () => {
-    setLoading(true);
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(response);
-    } catch (error: any) {
-      console.log(error);
-      alert(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+
   return (
     <View style={styles.container}>
       <View style={styles.switchContainer}>
         <TouchableOpacity
           style={[
             styles.switchButton,
-            currentIndex === 0 ? styles.activeSwitch : null,
+            styles.activeSwitch
           ]}
-          onPress={() => handleSwitchPress(0)} // Pass the index explicitly
         >
           <Text
             style={[
               styles.switchText,
-              currentIndex === 0 ? styles.activeSwitchText : null,
+              styles.activeSwitchText
             ]}
           >
             Log In
@@ -99,28 +73,19 @@ const LoginScreen = () => {
         <TouchableOpacity
           style={[
             styles.switchButton,
-            currentIndex === 1 ? styles.activeSwitch : null,
+            
           ]}
-          onPress={() => handleSwitchPress(1)} // Pass the index explicitly
+          onPress={() => navigation.navigate("SignUp")}
         >
           <Text
             style={[
               styles.switchText,
-              currentIndex === 1 ? styles.activeSwitchText : null,
             ]}
           >
             Sign Up
           </Text>
         </TouchableOpacity>
       </View>
-      <Swiper
-        style={styles.wrapper}
-        ref={swiperRef}
-        loop={false}
-        showsPagination={false}
-        index={0}
-        onIndexChanged={handleIndexChanged}
-      >
         {/* Log In Page */}
         <View style={styles.slide}>
           <View style={styles.lineInput}>
@@ -146,58 +111,6 @@ const LoginScreen = () => {
             </View>
           </TouchableOpacity>
         </View>
-
-        {/* Sign Up Page */}
-        <View style={styles.slide}>
-          <View style={styles.lineInput}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setEmail(text)}
-              placeholder="Email"
-              autoCapitalize="none"
-            />
-          </View>
-          <View style={styles.lineInput}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-              placeholder="Password"
-              secureTextEntry={true}
-            />
-          </View>
-          <View style={styles.lineInput}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setcfmPassword(text)}
-              value={password}
-              placeholder="Confirm Password"
-              secureTextEntry={true}
-            />
-          </View>
-          <View style={styles.lineInput}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setfName(text)}
-              placeholder="First name"
-              autoCapitalize="none"
-            />
-          </View>
-          <View style={styles.lineInput}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setlName(text)}
-              placeholder="Last name"
-              autoCapitalize="none"
-            />
-          </View>
-          <TouchableOpacity style={styles.loginButton} onPress={signUp}>
-            <View style={styles.loginButtonContent}>
-              <Text style={styles.loginButtonText}>Sign Up</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </Swiper>
     </View>
   );
 };

@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { User } from 'firebase/auth'
 import loginScreen from "./screens/LoginScreen";
 import HomeScreen from './screens/HomeScreen';
+import SignUpScreen from "./screens/SignUpScreen";
+
 
 const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
@@ -18,6 +20,8 @@ export default function App() {
     headerShown: false
   }}>
         <Stack.Screen name="Login" component={loginScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
