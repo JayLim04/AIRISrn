@@ -8,7 +8,7 @@ import {
   ScrollView,
   Keyboard,
   TouchableWithoutFeedback, 
-
+  Switch
 } from "react-native";
 import React, { useState, useRef } from "react";
 import { FIREBASE_AUTH, FIREBASE_DB } from "../firebaseConfig";
@@ -43,7 +43,8 @@ const SignUpScreen = () => {
   const [selectedRole, setSelectedRole] = useState("user");
   const [fname, setfName] = useState("");
   const [lname, setlName] = useState("");
-
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const auth = FIREBASE_AUTH;
   const db = FIREBASE_DB;
 
@@ -57,7 +58,13 @@ const SignUpScreen = () => {
     );
   };
   const navigation = useNavigation();
-
+  const dbRef = collection(db, "users");
+  const data = {
+    email: email,
+    firstName: fname,
+    lastName: lname,
+    caretaker: isEnabled
+  }
   const signUp = async () => {
     setLoading(true);
     try {
@@ -66,12 +73,7 @@ const SignUpScreen = () => {
         email,
         password
       );
-      const userDoc = await addDoc(collection(db, "users"), {
-        email: email,
-        firstName: fname,
-        lastName: lname,
-        caretaker: selectedRole,
-      });
+      const userDoc = await addDoc(dbRef,data);
       console.log(response);
     } catch (error: any) {
       console.log(error);
@@ -139,7 +141,12 @@ const SignUpScreen = () => {
             autoCapitalize="none"
           />
         </View>
-
+        <View style={styles.container}>
+      <Switch
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+    </View>
         <TouchableOpacity style={styles.loginButton} onPress={signUp}>
           <View style={styles.loginButtonContent}>
             <Text style={styles.loginButtonText}>Sign Up</Text>
