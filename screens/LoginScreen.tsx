@@ -16,21 +16,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import SignUpScreen from "./SignUpScreen";
-const Stack = createNativeStackNavigator();
 
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+const Stack = createNativeStackNavigator();
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState("");   
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -50,7 +41,6 @@ const LoginScreen = () => {
       setLoading(false);
     }
   };
-
 
   return (
     <View style={styles.container}>
@@ -73,7 +63,6 @@ const LoginScreen = () => {
         <TouchableOpacity
           style={[
             styles.switchButton,
-            
           ]}
           onPress={() => navigation.navigate("SignUp")}
         >
@@ -86,31 +75,31 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
       </View>
-        {/* Log In Page */}
-        <View style={styles.slide}>
-          <View style={styles.lineInput}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setEmail(text)}
-              placeholder="Email"
-              autoCapitalize="none"
-            />
-          </View>
-          <View style={styles.lineInput}>
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setPassword(text)}
-              value={password}
-              placeholder="Password"
-              secureTextEntry={true}
-            />
-          </View>
-          <TouchableOpacity style={styles.loginButton} onPress={signIn}>
-            <View style={styles.loginButtonContent}>
-              <Text style={styles.loginButtonText}>Log In</Text>
-            </View>
-          </TouchableOpacity>
+      {/* Log In Page */}
+      <View style={styles.slide}>
+        <View style={styles.lineInput}>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setEmail(text)}
+            placeholder="Email"
+            autoCapitalize="none"
+          />
         </View>
+        <View style={styles.lineInput}>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            placeholder="Password"
+            secureTextEntry={true}
+          />
+        </View>
+        <TouchableOpacity style={styles.loginButton} onPress={signIn}>
+          <View style={styles.loginButtonContent}>
+            <Text style={styles.loginButtonText}>Log In</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
