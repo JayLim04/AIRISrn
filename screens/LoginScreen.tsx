@@ -4,6 +4,10 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
+  Keyboard,
+  TouchableWithoutFeedback
 } from "react-native";
 import React, { useState, useRef } from "react";
 import { FIREBASE_AUTH } from "../firebaseConfig";
@@ -16,6 +20,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import SignUpScreen from "./SignUpScreen";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,7 +69,7 @@ const LoginScreen = () => {
           style={[
             styles.switchButton,
           ]}
-          onPress={() => navigation.navigate("SignUp")}
+          onPress={() => navigation.navigate('SignUp')}
         >
           <Text
             style={[
@@ -76,6 +81,8 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
       {/* Log In Page */}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps='handled'>
       <View style={styles.slide}>
         <View style={styles.lineInput}>
           <TextInput
@@ -100,6 +107,8 @@ const LoginScreen = () => {
           </View>
         </TouchableOpacity>
       </View>
+      </KeyboardAwareScrollView>
+      </TouchableWithoutFeedback>
     </View>
   );
 };

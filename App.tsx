@@ -7,6 +7,7 @@ import loginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import { FIREBASE_AUTH } from "./firebaseConfig";
 import LoginScreen from "./screens/LoginScreen";
+import MapScreen from "./screens/MapScreen";
 
 const Stack = createNativeStackNavigator();
 const InsideStack = createNativeStackNavigator();
@@ -14,7 +15,7 @@ const InsideStack = createNativeStackNavigator();
 function InsideLayout() {
   return (
   <InsideStack.Navigator>
-    <InsideStack.Screen name="HomePage" component={filler}></InsideStack.Screen>
+    <InsideStack.Screen name="HomePage" component={MapScreen}></InsideStack.Screen>
   </InsideStack.Navigator>
   );
 }
@@ -31,11 +32,12 @@ export default function App() {
 <NavigationContainer>
   <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
     {user ? (
-      <Stack.Screen name="inside" component={InsideLayout} options={{ headerShown: false }} />
+      <Stack.Screen name="Home" component={InsideLayout} options={{ headerShown: false }} />
     ) : (
       <>
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Map" component={MapScreen} options={{ headerShown: false }} />
       </>
     )}
   </Stack.Navigator>
