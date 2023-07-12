@@ -9,6 +9,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback
 } from "react-native";
+
 import React, { useState, useRef } from "react";
 import { FIREBASE_AUTH } from "../firebaseConfig";
 import {

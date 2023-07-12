@@ -5,6 +5,13 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import MapView, { Callout, Circle, Marker } from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 
+//Alan things 
+import React, { useEffect } from "react";
+import alanBtn from "@alan-ai/alan-sdk-web";
+
+// Key for alan
+const alanKey = '81c38e61708769f036394d63ca557ae32e956eca572e1d8b807a3e2338fdd0dc/stage';
+
 export default function MapScreen() {
   const [pin, setPin] = useState({
     latitude: 1.3521,
