@@ -6,7 +6,7 @@ import MapView, { Callout, Circle, Marker } from 'react-native-maps';
 import Geocoder from 'react-native-geocoding';
 
 //Alan things 
-import React, { useEffect } from "react";
+import ReactDOM from 'react-dom';
 import alanBtn from "@alan-ai/alan-sdk-web";
 
 // Key for alan
@@ -23,6 +23,22 @@ export default function MapScreen() {
   useEffect(() => {
     fetchLocationName();
   }, [pin]);
+
+  //Alan?
+  useEffect(() => {
+    // alanBtn({
+    //     key: alanKey,
+    //     onCommand: ({command}) => {
+    //         if(command === 'testCommand'){
+    //             alert('This code was executed');
+    //         }
+    //         if(command === 'whatisAlan'){
+    //             alert('This code was executed');
+    //         }
+    //     }
+        
+    // })
+  }, [])
 
   const fetchLocationName = async () => {
     try {
