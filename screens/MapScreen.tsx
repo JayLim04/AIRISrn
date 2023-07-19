@@ -7,7 +7,11 @@ import Geocoder from 'react-native-geocoding';
 
 //Alan things 
 import ReactDOM from 'react-dom';
+import { isMobile } from 'react-device-detect';
 import alanBtn from "@alan-ai/alan-sdk-web";
+import { Link } from '@react-navigation/native';
+//import { Redirect } from 'react-router-dom';
+
 
 // Key for alan
 const alanKey = '81c38e61708769f036394d63ca557ae32e956eca572e1d8b807a3e2338fdd0dc/stage';
@@ -25,20 +29,25 @@ export default function MapScreen() {
   }, [pin]);
 
   //Alan?
-  useEffect(() => {
-    // alanBtn({
-    //     key: alanKey,
-    //     onCommand: ({command}) => {
-    //         if(command === 'testCommand'){
-    //             alert('This code was executed');
-    //         }
-    //         if(command === 'whatisAlan'){
-    //             alert('This code was executed');
-    //         }
-    //     }
-        
-    // })
-  }, [])
+  // const alan = () => {
+  //     useEffect(() => {
+  //       alanBtn({
+  //           key: alanKey,
+  //           onCommand: ({ command }) => {
+  //               if(command === 'testCommand'){
+  //                   alert('This code was executed');
+  //               }
+  //               if(command === 'whatisAlan'){
+  //                   alert('This is alan');
+  //               }
+  //               if(command === 'redirectMap'){
+  //                   <Redirect to='/screens\MapScreen.tsx' />
+  //               }
+  //           }
+            
+  //       })
+  //     }, [])
+  // }
 
   const fetchLocationName = async () => {
     try {
